@@ -14,7 +14,7 @@
         <p>My library</p>
       </div>
       <div>
-        <button>Add book</button>
+        <button id="addBookBtn">Add book</button>
       </div>
       <div>
         <div id="copyrghtDiv" class="sidebarChild">
@@ -26,43 +26,25 @@
         </div>
       </div>
     </div>
-    <div id="mainDiv">
-      <div id="card" class="cards">
-        <div id="paraDiv" class="paraDiv">
-          <p>Davor Tjardovic</p>
-          <p>Gren na zelen dan</p>
-          <p>405 Pages</p>
-        </div>
-        <div class="readDiv">
-          <div class="checkDiv">
-            <div class="imgDiv">
-              <img src="/imgs/check-mark-icon.png" class="checkIcon" />
-            </div>
+    <div id="mainDiv"></div>
+    <div id="popUpDiv">
+      <form action="/library.html" id="form">
+        <fieldset id="popUp">
+          <p>Add your book</p>
+          <input type="text" id="title" placeholder="Enter Title" />
+          <input type="text" id="author" placeholder="Enter Author" />
+          <input
+            type="number"
+            id="numPgs"
+            placeholder="Enter Number Of Pages"
+          />
+          <div>
+            <input type="checkbox" id="readCheck" />
+            <label for="readCheck">Read</label>
           </div>
-          <div class="paraRead">
-            <p>Read</p>
-          </div>
-        </div>
-      </div>
-      <div id="popUpDiv">
-        <form action="/library.html">
-          <fieldset id="popUp">
-            <p>Add your book</p>
-            <input type="text" id="title" placeholder="Enter Title" />
-            <input type="text" id="author" placeholder="Enter Author" />
-            <input
-              type="number"
-              id="numPgs"
-              placeholder="Enter Number Of Pages"
-            />
-            <div>
-              <input type="checkbox" id="readCheck" />
-              <label for="readCheck">Read</label>
-            </div>
-            <input type="submit" value="Add" id="addBtn" />
-          </fieldset>
-        </form>
-      </div>
+          <input type="submit" value="Add" id="postBookBtn" />
+        </fieldset>
+      </form>
     </div>
   </body>
 </html>

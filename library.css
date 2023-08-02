@@ -29,9 +29,6 @@ body {
   flex-direction: row;
 }
 
-input {
-}
-
 #githubIcon {
   width: 5vw;
 }
@@ -120,7 +117,8 @@ input {
 #popUpDiv {
   width: clamp(17rem, 2.5vw, 20rem);
   height: clamp(17rem, 2.5vw, 10rem);
-  display: none;
+  position: absolute;
+  background-color: white;
 }
 
 #popUpDiv > form > fieldset {
