@@ -45,13 +45,40 @@ function addBook() {
   rmvImg.setAttribute("src", "./imgs/icons8-remove-48.png");
   rmvBtn.appendChild(rmvImg);
   let titlePara = document.createElement("p");
+  titlePara.setAttribute("class", "titlePara");
   titlePara.textContent = titleInput.value;
-  let authorPara = document.createElement("p");
-  authorPara.textContent = authorInput.value;
-  let pagesPara = document.createElement("p");
-  pagesPara.textContent = pagesInput.value;
   paraDiv.appendChild(titlePara);
+  let titleParaArr = Array.from(document.getElementsByClassName("titlePara"));
+  let authorPara = document.createElement("p");
+  authorPara.setAttribute("class", "authorPara");
+  authorPara.textContent = authorInput.value;
   paraDiv.appendChild(authorPara);
+  let authorParaArr = Array.from(document.getElementsByClassName("authorPara"));
+  let sameTitle = false;
+  let sameAuthor = false;
+  if (titleParaArr === [] && authorParaArr === []) {
+    return;
+  } else {
+    titleParaArr.forEach((element) => {
+      if (element.textContent === titleInput.value) {
+        console.log("isti naslov");
+        sameTitle = true;
+      }
+    });
+    authorParaArr.forEach((element) => {
+      if (element.textContent === authorInput.value) {
+        console.log("isti autor");
+        sameAuthor = true;
+      }
+    });
+  }
+  if (sameTitle === true && sameAuthor === true) {
+    console.log("RADI");
+  } else {
+    popUpDiv.style.display = "none";
+  }
+  let pagesPara = document.createElement("p");
+  pagesPara.textContent = `${pagesInput.value} Pages`;
   paraDiv.appendChild(pagesPara);
   let readDiv = document.createElement("div");
   readDiv.setAttribute("class", "readDiv");
@@ -86,7 +113,6 @@ function addBook() {
     } else if (img.style.opacity === "0") {
       newBook.read = true;
       img.style.opacity = "100%";
-      console.log(newBook);
     }
   });
   rmvBtn.addEventListener("click", () => {
@@ -94,17 +120,24 @@ function addBook() {
     libraryArr.splice(libraryArr.indexOf(newBook));
     console.log(card);
   });
-  console.log("initial", newBook);
-  console.log(libraryArr);
-  console.log(card);
   return newBook.read;
 }
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  checkIfSameTitle();
   addBook();
-  popUpDiv.style.display = "none";
+  resetForm();
 });
+
+function checkIfSameTitle() {}
+
+function resetForm() {
+  titleInput.value = "";
+  authorInput.value = "";
+  pagesInput.value = "";
+  readCheck.checked = false;
+}
 
 function checkIfRead() {
   if (readCheck.checked) {
