@@ -29,26 +29,44 @@ body {
   flex-direction: row;
 }
 
-#githubIcon {
-  width: 5vw;
-}
-
-#githubBtn {
-  width: 10vw;
-}
-
 #sideBarDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   border-right: solid black 5px;
   height: 100vh;
   width: 15%;
 }
 
+#sideBarDiv > div > button:hover {
+  cursor: pointer;
+}
+
+#githubIcon {
+  width: 100%;
+}
+
+#githubBtn {
+  width: 2vw;
+  border: none;
+  background-color: white;
+}
+
+#githubBtn:hover {
+  cursor: pointer;
+}
+
+#copyrghtDiv {
+  display: flex;
+}
+
 #mainDiv {
   display: grid;
   width: 85%;
-  grid-template-rows: 40vh;
+  grid-template-rows: 25vh 25vh 25vh 25vh;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 40vh;
+  grid-auto-rows: 25vh;
   justify-items: center;
   align-items: center;
 }
@@ -57,8 +75,8 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 60%;
-  height: 80%;
+  width: 50%;
+  height: 95%;
   border: solid black;
   font-size: clamp(1rem, 2.5vw, 2rem);
 }
@@ -128,12 +146,18 @@ body {
 }
 
 #popUpDiv {
-  width: clamp(17rem, 2.5vw, 20rem);
-  height: clamp(17rem, 2.5vw, 10rem);
-  position: absolute;
-  left: 50%;
+  width: clamp(15%, 2.5vw, 30%);
+  height: 30%;
+  position: fixed;
+  left: 56%;
   bottom: 50%;
+  transform: translate(-42%, 0);
   background-color: white;
+}
+
+#popUpDiv > form {
+  width: 100%;
+  height: 100%;
 }
 
 #popUpDiv > form > fieldset {
@@ -141,10 +165,15 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: clamp(17rem, 2.5vw, 20rem);
-  height: clamp(17rem, 2.5vw, 10rem);
+  width: 100%;
+  height: 100%;
 }
 
-#numPgs {
-  width: 76%;
+#popUpDiv > form > fieldset > input {
+  width: 100%;
+  height: 100%;
+}
+
+#postBookBtn {
+  cursor: pointer;
 }

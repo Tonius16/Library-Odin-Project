@@ -2,10 +2,12 @@ const addBookBtn = document.getElementById("addBookBtn");
 const mainDiv = document.getElementById("mainDiv");
 const popUpDiv = document.getElementById("popUpDiv");
 const form = document.getElementById("form");
+const field = document.getElementById("field");
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const pagesInput = document.getElementById("numPgs");
 const readCheck = document.getElementById("readCheck");
+const postBookBtn = document.getElementById("postBookBtn");
 
 popUpDiv.style.display = "none";
 
@@ -28,32 +30,42 @@ function addBook() {
   } else {
     newBook.read = false;
   }
-  libraryArr.push(newBook);
   let card = document.createElement("div");
-  card.setAttribute("data-index-number", libraryArr.indexOf(newBook));
   card.setAttribute("id", "card");
   card.setAttribute("class", "cards");
   let paraDiv = document.createElement("div");
   paraDiv.setAttribute("id", "paraDiv");
   paraDiv.setAttribute("class", "paraDiv");
-  card.appendChild(paraDiv);
   let rmvBtn = document.createElement("button");
   rmvBtn.setAttribute("id", "rmvBtn");
-  paraDiv.appendChild(rmvBtn);
   let rmvImg = document.createElement("img");
   rmvImg.setAttribute("id", "rmvImg");
   rmvImg.setAttribute("src", "./imgs/icons8-remove-48.png");
-  rmvBtn.appendChild(rmvImg);
+  rmvImg.style.cursor = "pointer";
   let titlePara = document.createElement("p");
   titlePara.setAttribute("class", "titlePara");
   titlePara.textContent = titleInput.value;
-  paraDiv.appendChild(titlePara);
   let titleParaArr = Array.from(document.getElementsByClassName("titlePara"));
   let authorPara = document.createElement("p");
   authorPara.setAttribute("class", "authorPara");
   authorPara.textContent = authorInput.value;
-  paraDiv.appendChild(authorPara);
   let authorParaArr = Array.from(document.getElementsByClassName("authorPara"));
+  let pagesPara = document.createElement("p");
+  pagesPara.textContent = `${pagesInput.value} Pages`;
+  let readDiv = document.createElement("div");
+  readDiv.setAttribute("class", "readDiv");
+  let checkDiv = document.createElement("div");
+  checkDiv.setAttribute("class", "checkDiv");
+  let imgDiv = document.createElement("div");
+  imgDiv.setAttribute("class", "imgDiv");
+  let img = document.createElement("img");
+  img.setAttribute("src", "/imgs/check-mark-icon.png");
+  img.setAttribute("class", "checkIcon");
+  img.style.cursor = "pointer";
+  let paraReadDiv = document.createElement("div");
+  paraReadDiv.setAttribute("class", "paraRead");
+  let paraRead = document.createElement("p");
+  paraRead.textContent = "Read";
   let sameTitle = false;
   let sameAuthor = false;
   if (titleParaArr === [] && authorParaArr === []) {
@@ -61,45 +73,51 @@ function addBook() {
   } else {
     titleParaArr.forEach((element) => {
       if (element.textContent === titleInput.value) {
-        console.log("isti naslov");
         sameTitle = true;
       }
     });
     authorParaArr.forEach((element) => {
       if (element.textContent === authorInput.value) {
-        console.log("isti autor");
         sameAuthor = true;
       }
     });
   }
+
   if (sameTitle === true && sameAuthor === true) {
-    console.log("RADI");
+    let sameInput = document.createElement("p");
+    sameInput.setAttribute("id", "sameInputPara");
+    sameInput.textContent = "You already have this book";
+    field.insertBefore(sameInput, field.childNodes[6]);
+    titleInput.addEventListener("input", () => {
+      postBookBtn.disabled = false;
+    });
+    postBookBtn.addEventListener("click", () => {
+      sameInput.remove();
+    });
+    postBookBtn.disabled = true;
   } else {
     popUpDiv.style.display = "none";
+    appendOnCard();
   }
-  let pagesPara = document.createElement("p");
-  pagesPara.textContent = `${pagesInput.value} Pages`;
-  paraDiv.appendChild(pagesPara);
-  let readDiv = document.createElement("div");
-  readDiv.setAttribute("class", "readDiv");
-  card.appendChild(readDiv);
-  let checkDiv = document.createElement("div");
-  checkDiv.setAttribute("class", "checkDiv");
-  readDiv.appendChild(checkDiv);
-  let imgDiv = document.createElement("div");
-  imgDiv.setAttribute("class", "imgDiv");
-  checkDiv.appendChild(imgDiv);
-  let img = document.createElement("img");
-  img.setAttribute("src", "/imgs/check-mark-icon.png");
-  img.setAttribute("class", "checkIcon");
-  imgDiv.appendChild(img);
-  let paraReadDiv = document.createElement("div");
-  paraReadDiv.setAttribute("class", "paraRead");
-  readDiv.appendChild(paraReadDiv);
-  let paraRead = document.createElement("p");
-  paraRead.textContent = "Read";
-  paraReadDiv.appendChild(paraRead);
-  mainDiv.appendChild(card);
+
+  function appendOnCard() {
+    mainDiv.appendChild(card);
+    card.appendChild(paraDiv);
+    paraDiv.appendChild(rmvBtn);
+    rmvBtn.appendChild(rmvImg);
+    rmvBtn.appendChild(rmvImg);
+    paraDiv.appendChild(titlePara);
+    paraDiv.appendChild(authorPara);
+    paraDiv.appendChild(pagesPara);
+    card.appendChild(readDiv);
+    readDiv.appendChild(checkDiv);
+    checkDiv.appendChild(imgDiv);
+    imgDiv.appendChild(img);
+    readDiv.appendChild(paraReadDiv);
+    paraReadDiv.appendChild(paraRead);
+    libraryArr.push(newBook);
+    card.setAttribute("data-index-number", libraryArr.indexOf(newBook));
+  }
   if (checkIfRead()) {
     img.style.opacity = "100%";
   } else {
@@ -125,12 +143,9 @@ function addBook() {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  checkIfSameTitle();
   addBook();
   resetForm();
 });
-
-function checkIfSameTitle() {}
 
 function resetForm() {
   titleInput.value = "";
