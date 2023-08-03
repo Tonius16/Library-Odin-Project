@@ -71,6 +71,19 @@ body {
   height: 70%;
 }
 
+#rmvBtn {
+  width: 10%;
+  height: 20%;
+  align-self: flex-end;
+  appearance: none;
+  border: none;
+  background-color: white;
+}
+
+#rmvImg {
+  width: 100%;
+}
+
 .cards > .paraDiv > p {
   display: flex;
   justify-content: center;

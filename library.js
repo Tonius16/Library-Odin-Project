@@ -29,20 +29,21 @@ function addBook() {
     newBook.read = false;
   }
   libraryArr.push(newBook);
-  console.log(newBook.read);
-  console.log(libraryArr);
-  console.log(newBook);
-  return newBook.read;
-}
-
-function createCard() {
   let card = document.createElement("div");
+  card.setAttribute("data-index-number", libraryArr.indexOf(newBook));
   card.setAttribute("id", "card");
   card.setAttribute("class", "cards");
   let paraDiv = document.createElement("div");
   paraDiv.setAttribute("id", "paraDiv");
   paraDiv.setAttribute("class", "paraDiv");
   card.appendChild(paraDiv);
+  let rmvBtn = document.createElement("button");
+  rmvBtn.setAttribute("id", "rmvBtn");
+  paraDiv.appendChild(rmvBtn);
+  let rmvImg = document.createElement("img");
+  rmvImg.setAttribute("id", "rmvImg");
+  rmvImg.setAttribute("src", "./imgs/icons8-remove-48.png");
+  rmvBtn.appendChild(rmvImg);
   let titlePara = document.createElement("p");
   titlePara.textContent = titleInput.value;
   let authorPara = document.createElement("p");
@@ -79,19 +80,29 @@ function createCard() {
   }
   img.addEventListener("click", () => {
     if (img.style.opacity === "1") {
+      newBook.read = false;
       img.style.opacity = "0%";
-      console.log(typeof img.style.opacity, img.style.opacity);
+      console.log(newBook);
     } else if (img.style.opacity === "0") {
+      newBook.read = true;
       img.style.opacity = "100%";
+      console.log(newBook);
     }
   });
+  rmvBtn.addEventListener("click", () => {
+    card.remove();
+    libraryArr.splice(libraryArr.indexOf(newBook));
+    console.log(card);
+  });
+  console.log("initial", newBook);
+  console.log(libraryArr);
   console.log(card);
+  return newBook.read;
 }
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   addBook();
-  createCard();
   popUpDiv.style.display = "none";
 });
 
