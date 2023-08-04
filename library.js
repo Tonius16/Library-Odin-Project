@@ -1,4 +1,5 @@
 const addBookBtn = document.getElementById("addBookBtn");
+const bookCounter = document.getElementById("bookCounter");
 const mainDiv = document.getElementById("mainDiv");
 const popUpDiv = document.getElementById("popUpDiv");
 const form = document.getElementById("form");
@@ -12,6 +13,8 @@ const postBookBtn = document.getElementById("postBookBtn");
 popUpDiv.style.display = "none";
 
 let libraryArr = [];
+
+bookCounter.textContent = `Total books in library: ${libraryArr.length}`;
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -31,6 +34,7 @@ function addBook() {
     newBook.read = false;
   }
   let card = document.createElement("div");
+  card.setAttribute("data-index-number", libraryArr.indexOf(newBook));
   card.setAttribute("id", "card");
   card.setAttribute("class", "cards");
   let paraDiv = document.createElement("div");
@@ -116,7 +120,6 @@ function addBook() {
     readDiv.appendChild(paraReadDiv);
     paraReadDiv.appendChild(paraRead);
     libraryArr.push(newBook);
-    card.setAttribute("data-index-number", libraryArr.indexOf(newBook));
   }
   if (checkIfRead()) {
     img.style.opacity = "100%";
@@ -134,10 +137,14 @@ function addBook() {
     }
   });
   rmvBtn.addEventListener("click", () => {
-    card.remove();
-    libraryArr.splice(libraryArr.indexOf(newBook));
+    libraryArr.splice(card.getAttribute("data-index-number"), 1);
+    bookCounter.textContent = `Total books in library: ${libraryArr.length}`;
     console.log(card);
+    console.log(libraryArr);
+    card.remove();
   });
+  bookCounter.textContent = `Total books in library: ${libraryArr.length}`;
+  console.log(card);
   return newBook.read;
 }
 
@@ -145,6 +152,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   addBook();
   resetForm();
+  console.log(libraryArr);
 });
 
 function resetForm() {
