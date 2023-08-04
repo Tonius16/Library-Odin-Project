@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="library.css" />
     <script src="library.js" defer></script>
+    <link rel="icon" href="./imgs/book.png" />
     <title>Library</title>
   </head>
   <body>
@@ -41,19 +42,22 @@
             id="title"
             placeholder="Enter Title"
             maxlength="25"
+            required
           />
           <input
             type="text"
             id="author"
             placeholder="Enter Author"
             maxlength="30"
+            required
           />
           <input
             type="number"
             id="numPgs"
             placeholder="Enter Number Of Pages"
             min="1"
-            max="1999"
+            max="9999"
+            required
           />
           <div>
             <input type="checkbox" id="readCheck" />

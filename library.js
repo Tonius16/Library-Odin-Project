@@ -51,11 +51,20 @@ function addBook() {
   rmvImg.style.cursor = "pointer";
   let titlePara = document.createElement("p");
   titlePara.setAttribute("class", "titlePara");
-  titlePara.textContent = titleInput.value;
+  titlePara.textContent =
+    '"' +
+    titleInput.value.charAt(0).toUpperCase() +
+    titleInput.value.slice(1) +
+    '"';
   let titleParaArr = Array.from(document.getElementsByClassName("titlePara"));
   let authorPara = document.createElement("p");
   authorPara.setAttribute("class", "authorPara");
-  authorPara.textContent = authorInput.value;
+
+  authorPara.textContent =
+    "By:" +
+    " " +
+    authorInput.value.charAt(0).toUpperCase() +
+    authorInput.value.slice(1);
   let authorParaArr = Array.from(document.getElementsByClassName("authorPara"));
   let pagesPara = document.createElement("p");
   pagesPara.textContent = `${pagesInput.value} Pages`;
@@ -66,7 +75,7 @@ function addBook() {
   let imgDiv = document.createElement("div");
   imgDiv.setAttribute("class", "imgDiv");
   let img = document.createElement("img");
-  img.setAttribute("src", "/imgs/check-mark-icon.png");
+  img.setAttribute("src", "./imgs/check-mark-icon.png");
   img.setAttribute("class", "checkIcon");
   img.style.cursor = "pointer";
   let paraReadDiv = document.createElement("div");
@@ -94,6 +103,7 @@ function addBook() {
     let sameInput = document.createElement("p");
     sameInput.setAttribute("id", "sameInputPara");
     sameInput.textContent = "You already have this book";
+    sameInput.style.color = "red";
     field.insertBefore(sameInput, field.childNodes[6]);
     titleInput.addEventListener("input", () => {
       postBookBtn.disabled = false;
@@ -141,6 +151,7 @@ function addBook() {
     } else if (img.style.opacity === "0") {
       newBook.read = true;
       img.style.opacity = "100%";
+      console.log(newBook);
     }
   });
   rmvBtn.addEventListener("click", () => {
@@ -155,7 +166,7 @@ function addBook() {
     let id = null;
     let pos = 100;
     clearInterval(id);
-    id = setInterval(frame, 3);
+    id = setInterval(frame, 2);
     function frame() {
       if (pos == 0) {
         clearInterval(id);
@@ -170,7 +181,7 @@ function addBook() {
     let id = null;
     let pos = 0;
     clearInterval(id);
-    id = setInterval(frame, 3);
+    id = setInterval(frame, 2);
     function frame() {
       if (pos == 100) {
         clearInterval(id);

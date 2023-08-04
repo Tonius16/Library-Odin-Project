@@ -21,7 +21,6 @@ ol,
 ul {
   margin: 0;
   padding: 0;
-  font-weight: normal;
 }
 
 body {
@@ -36,21 +35,29 @@ body {
   align-items: center;
   height: 100vh;
   width: 15%;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
   box-shadow: 7px 0px 19px 0px rgba(0, 0, 0, 0.75);
-  background-color: rgb(108, 118, 124);
+  background: linear-gradient(
+    to top,
+    lightgrey 0%,
+    lightgrey 1%,
+    #e0e0e0 26%,
+    #efefef 48%,
+    #d9d9d9 75%,
+    #bcbcbc 100%
+  );
   position: sticky;
   top: 0;
 }
 
 #sideBarDiv > div:nth-child(1) {
   padding-top: 10px;
-  font-size: clamp(1em, 2.5vw, 5em);
+  font-size: clamp(0.7em, 2.5vw, 2.5em);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 #sideBarDiv > div:nth-child(2) {
-  font-size: clamp(1em, 2.5vw, 1.4em);
+  font-size: clamp(0.4em, 2.5vw, 1.3em);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 #sideBarDiv > div > button:hover {
@@ -59,30 +66,36 @@ body {
 
 #addBookBtn {
   border: none;
-  background-color: rgb(108, 118, 124);
+  background-color: rgba(108, 118, 124, 0);
 }
 
 #addBookImg {
-  width: clamp(20%, 2.5vw, 40%);
+  width: clamp(25%, 2.5vw, 40%);
 }
 
-#githubIcon {
+#copyrghtDiv {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#copyrghtDiv > a {
+  width: clamp(10%, 2.5vw, 20%);
 }
 
 #githubBtn {
-  width: 2vw;
+  width: 100%;
   border: none;
-  background-color: rgb(108, 118, 124);
+  background-color: rgba(108, 118, 124, 0);
+}
+
+#githubIcon {
+  width: 80%;
 }
 
 #githubBtn:hover {
   cursor: pointer;
-}
-
-#copyrghtDiv {
-  display: flex;
-  align-items: center;
 }
 
 #mainDiv {
@@ -93,6 +106,15 @@ body {
   grid-auto-rows: 50vh;
   justify-items: center;
   align-items: center;
+  background: linear-gradient(
+    99.6deg,
+    rgb(112, 128, 152) 10.6%,
+    rgb(242, 227, 234) 32.9%,
+    rgb(234, 202, 213) 52.7%,
+    rgb(220, 227, 239) 72.8%,
+    rgb(185, 205, 227) 81.1%,
+    rgb(154, 180, 212) 102.4%
+  );
 }
 
 .cards {
@@ -101,8 +123,10 @@ body {
   text-align: center;
   width: 85%;
   height: 70%;
-  border: solid black;
+  border-radius: 5px;
+  box-shadow: 7px 0px 19px 0px rgba(0, 0, 0, 0.75);
   font-size: clamp(1rem, 2.5vw, 2rem);
+  background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
 }
 
 #grayOutSpan {
@@ -130,7 +154,7 @@ body {
   align-self: flex-end;
   appearance: none;
   border: none;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 #rmvImg {
@@ -143,6 +167,7 @@ body {
   flex-direction: column;
   height: 100%;
   width: 100%;
+  border-bottom: solid rgba(0, 0, 0, 0.322);
 }
 
 .readDiv {
@@ -166,7 +191,7 @@ body {
   justify-content: center;
   width: 15%;
   height: 100%;
-  border: solid rgb(144, 235, 84);
+  border: solid rgb(56, 58, 55);
 }
 
 .checkIcon {
@@ -183,12 +208,18 @@ body {
 #popUpDiv {
   width: clamp(17%, 2.5vw, 35%);
   height: 35%;
-  position: absolute;
+  position: fixed;
   left: 56%;
   bottom: 40%;
   transform: translate(-42%, 0);
   z-index: 10000;
-  background-color: white;
+  background: radial-gradient(
+    666px at 0.4% 48%,
+    rgb(202, 204, 227) 0%,
+    rgb(89, 89, 99) 97.5%
+  );
+  box-shadow: 7px 0px 19px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
 }
 
 #popUpDiv > form {
@@ -209,6 +240,13 @@ body {
 #popUpDiv > form > fieldset > input {
   width: 90%;
   height: 15%;
+  border-radius: 5px;
+  appearance: none;
+  font-size: clamp(0.5rem, 2.5vw, 1rem);
+}
+
+#popUpDiv > form > fieldset > p {
+  font-size: clamp(1rem, 2.5vw, 2rem);
 }
 
 #popUpDiv > form > fieldset > div {
@@ -217,12 +255,21 @@ body {
   align-items: center;
   justify-content: center;
   width: 90%;
-  height: 30%;
+  height: 20%;
 }
 
 #popUpDiv > form > fieldset > div > input {
-  width: 30%;
-  height: 30%;
+  width: 15%;
+  height: 40%;
+}
+
+#postBookBtn {
+  background: linear-gradient(
+    113.5deg,
+    rgb(234, 234, 234) 22.3%,
+    rgb(201, 234, 211) 56.6%,
+    rgb(255, 180, 189) 90.9%
+  );
 }
 
 #postBookBtn {
