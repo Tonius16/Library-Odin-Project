@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="library.css" />
     <script src="library.js" defer></script>
-    <title>Admin Dashboard</title>
+    <title>Library</title>
   </head>
   <body>
     <div id="sideBarDiv">
@@ -15,18 +15,23 @@
       </div>
       <div><p id="bookCounter"></p></div>
       <div>
-        <button id="addBookBtn">Add book</button>
+        <button id="addBookBtn">
+          <img src="./imgs/plus.png" id="addBookImg" />
+        </button>
       </div>
-
-      <div id="copyrghtDiv" class="sidebarChild">
-        <p>Copyright © 2023 Tonius16</p>
-        <a href="https://github.com/Tonius16" id="gitBtn">
-          <button id="githubBtn">
-            <img src="./imgs/github-icon.png" id="githubIcon" /></button
-        ></a>
+      <div>
+        <div id="copyrghtDiv" class="sidebarChild">
+          <p>Copyright © 2023 Tonius16</p>
+          <a href="https://github.com/Tonius16" id="gitBtn">
+            <button id="githubBtn">
+              <img src="./imgs/github-icon.png" id="githubIcon" /></button
+          ></a>
+        </div>
       </div>
     </div>
-    <div id="mainDiv"></div>
+    <div id="mainDiv">
+      <span id="grayOutSpan"></span>
+    </div>
     <div id="popUpDiv">
       <form action="/library.html" id="form">
         <fieldset id="field">

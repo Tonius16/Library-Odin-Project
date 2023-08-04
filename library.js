@@ -1,6 +1,7 @@
 const addBookBtn = document.getElementById("addBookBtn");
 const bookCounter = document.getElementById("bookCounter");
 const mainDiv = document.getElementById("mainDiv");
+const grayOutSpan = document.getElementById("grayOutSpan");
 const popUpDiv = document.getElementById("popUpDiv");
 const form = document.getElementById("form");
 const field = document.getElementById("field");
@@ -11,6 +12,7 @@ const readCheck = document.getElementById("readCheck");
 const postBookBtn = document.getElementById("postBookBtn");
 
 popUpDiv.style.display = "none";
+grayOutSpan.style.display = "none";
 
 let libraryArr = [];
 
@@ -34,9 +36,10 @@ function addBook() {
     newBook.read = false;
   }
   let card = document.createElement("div");
-  card.setAttribute("data-index-number", libraryArr.indexOf(newBook));
+
   card.setAttribute("id", "card");
   card.setAttribute("class", "cards");
+  card.style.opacity = "0%";
   let paraDiv = document.createElement("div");
   paraDiv.setAttribute("id", "paraDiv");
   paraDiv.setAttribute("class", "paraDiv");
@@ -100,7 +103,10 @@ function addBook() {
     });
     postBookBtn.disabled = true;
   } else {
+    grayOutSpan.style.display = "none";
+    addBookBtn.disabled = false;
     popUpDiv.style.display = "none";
+    addCardAnimation();
     appendOnCard();
   }
 
@@ -120,6 +126,7 @@ function addBook() {
     readDiv.appendChild(paraReadDiv);
     paraReadDiv.appendChild(paraRead);
     libraryArr.push(newBook);
+    card.setAttribute("data-index-number", libraryArr.indexOf(newBook));
   }
   if (checkIfRead()) {
     img.style.opacity = "100%";
@@ -137,14 +144,43 @@ function addBook() {
     }
   });
   rmvBtn.addEventListener("click", () => {
+    card.setAttribute("data-index-number", libraryArr.indexOf(newBook));
     libraryArr.splice(card.getAttribute("data-index-number"), 1);
+    removeCardAnimation();
     bookCounter.textContent = `Total books in library: ${libraryArr.length}`;
     console.log(card);
     console.log(libraryArr);
-    card.remove();
   });
+  function removeCardAnimation() {
+    let id = null;
+    let pos = 100;
+    clearInterval(id);
+    id = setInterval(frame, 3);
+    function frame() {
+      if (pos == 0) {
+        clearInterval(id);
+        card.remove();
+      } else {
+        pos--;
+        card.style.opacity = pos + "%";
+      }
+    }
+  }
+  function addCardAnimation() {
+    let id = null;
+    let pos = 0;
+    clearInterval(id);
+    id = setInterval(frame, 3);
+    function frame() {
+      if (pos == 100) {
+        clearInterval(id);
+      } else {
+        pos++;
+        card.style.opacity = pos + "%";
+      }
+    }
+  }
   bookCounter.textContent = `Total books in library: ${libraryArr.length}`;
-  console.log(card);
   return newBook.read;
 }
 
@@ -172,4 +208,6 @@ function checkIfRead() {
 
 addBookBtn.addEventListener("click", () => {
   popUpDiv.style.display = "";
+  addBookBtn.disabled = true;
+  grayOutSpan.style.display = "";
 });
