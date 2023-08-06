@@ -88,12 +88,24 @@ function addBook() {
     return;
   } else {
     titleParaArr.forEach((element) => {
-      if (element.textContent === titleInput.value) {
+      if (
+        element.textContent ===
+        '"' +
+          titleInput.value.charAt(0).toUpperCase() +
+          titleInput.value.slice(1) +
+          '"'
+      ) {
         sameTitle = true;
       }
     });
     authorParaArr.forEach((element) => {
-      if (element.textContent === authorInput.value) {
+      if (
+        element.textContent ===
+        "By:" +
+          " " +
+          authorInput.value.charAt(0).toUpperCase() +
+          authorInput.value.slice(1)
+      ) {
         sameAuthor = true;
       }
     });
@@ -147,36 +159,39 @@ function addBook() {
     if (img.style.opacity === "1") {
       newBook.read = false;
       img.style.opacity = "0%";
-      console.log(newBook);
     } else if (img.style.opacity === "0") {
       newBook.read = true;
       img.style.opacity = "100%";
-      console.log(newBook);
     }
   });
   rmvBtn.addEventListener("click", () => {
-    card.setAttribute("data-index-number", libraryArr.indexOf(newBook));
-    libraryArr.splice(card.getAttribute("data-index-number"), 1);
-    removeCardAnimation();
-    bookCounter.textContent = `Total books in library: ${libraryArr.length}`;
-    console.log(card);
-    console.log(libraryArr);
-  });
-  function removeCardAnimation() {
-    let id = null;
-    let pos = 100;
-    clearInterval(id);
-    id = setInterval(frame, 2);
-    function frame() {
-      if (pos == 0) {
-        clearInterval(id);
-        card.remove();
-      } else {
-        pos--;
-        card.style.opacity = pos + "%";
+    function removeCardAnimation() {
+      let id = null;
+      let pos = 100;
+      clearInterval(id);
+      id = setInterval(frame, 2);
+      function frame() {
+        if (pos == 0) {
+          clearInterval(id);
+          card.remove();
+        } else {
+          pos--;
+          card.style.opacity = pos + "%";
+        }
       }
     }
-  }
+    let cardsArray = Array.from(document.getElementsByClassName("cards"));
+    for (let i = 0; i < libraryArr.length; i++) {
+      cardsArray.at([i]).setAttribute("data-index-number", [i]);
+    }
+    libraryArr.splice(card.getAttribute("data-index-number"), 1);
+    cardsArray.splice(card.getAttribute("data-index-number"), 1);
+    removeCardAnimation();
+    for (let i = 0; i < libraryArr.length; i++) {
+      cardsArray.at([i]).setAttribute("data-index-number", [i]);
+    }
+    bookCounter.textContent = `Total books in library: ${libraryArr.length}`;
+  });
   function addCardAnimation() {
     let id = null;
     let pos = 0;
@@ -199,7 +214,6 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   addBook();
   resetForm();
-  console.log(libraryArr);
 });
 
 function resetForm() {
